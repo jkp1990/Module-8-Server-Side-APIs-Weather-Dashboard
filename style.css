@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    background-image: linear-gradient(90deg, rgb(78, 78, 253), rgb(113, 50, 161));
+    color: white;
+    font-weight: 900;
+}
+
+button {
+    border: 0;
+    background-color: gray;
+    border-radius: 10px !important;
+}
+
+.primary {
+    width: 100%;
+    background-color: lightblue;
+}
+
+input {
+    border: 1px solid gray;
+    padding: .5rem;
+}
+
+.weather-search {
+    width: 100%;
+}
+
+#today {
+    /* border: 1px solid black; */
+    /* padding: 1rem; */
+}
+
+
+.forecast-item {
+    background-color: rgb(18, 18, 49);
+    color: white;
+    border: 5px solid white;
+}
