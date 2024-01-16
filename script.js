@@ -1,3 +1,9 @@
+/*
+  git add .
+  git commit -m "your message here"
+  git push origin master
+*/
+
 const API_KEY = "eed8ea420c7911d60f8e86b3c61e0305";
 const searchForm = $("#search-form");
 const citiesContainer = $("#cities");
