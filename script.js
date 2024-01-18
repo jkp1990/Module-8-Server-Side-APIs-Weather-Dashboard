@@ -12,31 +12,31 @@ const forecastContainer = $("#forecast");
 const historyContainer = $("#history");
 
 let data;
-let history = []
+let history = [];
 
-loadSearchHistory()
+loadSearchHistory();
 
 function loadSearchHistory() {
-  history = JSON.parse(localStorage.getItem('history')||'[]')
-  renderSearchHistory()
+  history = JSON.parse(localStorage.getItem("history") || "[]");
+  renderSearchHistory();
 }
 
 function renderSearchHistory() {
-  historyContainer.html("")
+  historyContainer.html("");
   history.forEach((q) => {
     historyContainer.append(`
       <button onclick="getLocations('${q}', false)" class="m-1 rounded">
         ${q}
       </button>
-    `)
-  })
+    `);
+  });
 }
 
 function addToSearchHistory(query) {
-  history.unshift(query)
-  if (history.length > 10) history.pop()
-  localStorage.setItem('history', JSON.stringify(history))
-  renderSearchHistory()
+  history.unshift(query);
+  if (history.length > 10) history.pop();
+  localStorage.setItem("history", JSON.stringify(history));
+  renderSearchHistory();
 }
 
 async function getCurrent(i) {
@@ -47,8 +47,8 @@ async function getCurrent(i) {
   );
   const currentWeather = await res.json();
   // https://openweathermap.org/weather-conditions
-  let icon = `https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`
-    console.log(`current:`, currentWeather)
+  let icon = `https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`;
+  console.log(`current:`, currentWeather);
   todayContainer.html(`
         <h2>Current weather</h2>
         <div id="current-temp">
@@ -78,15 +78,15 @@ async function getForecast(i) {
         </div>
     `);
 
-    const itemsContainer = $("#forecast-items")
-    renderForecast(itemsContainer, forecast)
+  const itemsContainer = $("#forecast-items");
+  renderForecast(itemsContainer, forecast);
 }
 
 function renderForecast(container, forecast) {
   forecast.list.forEach((day, i) => {
-    if (i%7 !== 0) return
-    let date = dayjs(new Date(day.dt_txt)).format('ddd DD MMM')
-    let icon = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`
+    if (i % 7 !== 0) return;
+    let date = dayjs(new Date(day.dt_txt)).format("ddd DD MMM");
+    let icon = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
     console.log(date);
     container.append(`
             <div class="forecast-item col-lg-3 col-md-4 col-sm-6 p-1">
@@ -102,15 +102,15 @@ function renderForecast(container, forecast) {
 }
 
 async function getLocations(city, addToHistory = true) {
-  if (addToHistory) addToSearchHistory(city)
+  if (addToHistory) addToSearchHistory(city);
   const res = await fetch(
     `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=10&appid=${API_KEY}`
   );
   data = await res.json();
 
   // empty the forecast/city containers
-  todayContainer.html("")
-  forecastContainer.html("")
+  todayContainer.html("");
+  forecastContainer.html("");
   citiesContainer.html("");
 
   data.forEach((loc, i) => {
