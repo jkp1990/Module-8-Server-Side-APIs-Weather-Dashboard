@@ -104,7 +104,7 @@ function renderForecast(container, forecast) {
 async function getLocations(city, addToHistory = true) {
   if (addToHistory) addToSearchHistory(city);
   const res = await fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=10&appid=${API_KEY}`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=10&appid=${API_KEY}`
   );
   data = await res.json();
 
